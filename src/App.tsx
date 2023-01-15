@@ -1,11 +1,18 @@
 import "./App.css";
-import { PageLayout } from "./common/layouts/PageLayout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HomePage } from "./pages/Home";
+import { SearchPage } from "./pages/Search";
+import { NewStoriesPage } from "./pages/NewStories";
 
 function App() {
   return (
-    <PageLayout title="">
-      <p className="text-lg">hello</p>
-    </PageLayout>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/new" element={<NewStoriesPage />} />
+        <Route path="/search?" element={<SearchPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
