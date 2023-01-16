@@ -21,25 +21,20 @@ export const SearchPage = () => {
   } = useFetchApi();
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const _sortBy = location.state?.sortBy;
-
   const _type = location.state?.type;
-
   const _dateRange = location.state?.dateRange;
-
   const _query = location.state?.query;
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   const [filters, setFilters] = useState({
     query: _query || "",
     type: _type || "All",
     sortBy: _sortBy || "popularity",
     dateRange: _dateRange || "All",
   });
-
-  const navigate = useNavigate();
 
   const { query } = filters;
 
