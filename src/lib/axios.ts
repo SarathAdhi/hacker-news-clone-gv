@@ -8,6 +8,9 @@ export type AxiosResponse = {
 
 const axios = Axios.create({
   baseURL: "http://hn.algolia.com/api/v1",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 axios.interceptors.response.use(
