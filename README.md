@@ -42,3 +42,4 @@ Open [http://127.0.0.1:5173/](http://127.0.0.1:5173/) with your browser to see t
 - [Tailwind CSS](https://tailwindcss.com/) (Utility-first CSS)
 - [MUI](https://mui.com/material-ui/getting-started/overview/) (UI Library)
 - [Vite](https://vitejs.dev/) (Build tool)
+- [TypeScript](https://www.typescriptlang.org/) (Language)
