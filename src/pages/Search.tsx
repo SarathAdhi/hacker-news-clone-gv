@@ -1,15 +1,13 @@
-import { MenuItem, Select, InputLabel, TextField } from "@mui/material";
-import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { DialogBox } from "../common/components/DialogBox";
 import { NewsContainer } from "../common/components/NewsContainer";
 import { useFetchApi } from "../common/hooks/useFetchApi";
 import { PageLayout } from "../common/layouts/PageLayout";
-import { useFilterStore } from "../utils/store";
 import { urlParser } from "../utils/url-parser";
+import { FilterSettings } from "../modules/Search/FilterSettings";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { Component } from "../common/types/page";
 
 export const SearchPage = () => {
   const {
@@ -30,12 +28,12 @@ export const SearchPage = () => {
 
   const _dateRange = location.state?.dateRange;
 
-  const query = location.state?.query;
+  const _query = location.state?.query;
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const [filters, setFilters] = useState({
-    query: "",
+    query: _query || "",
     type: _type || "All",
     sortBy: _sortBy || "popularity",
     dateRange: _dateRange || "All",
@@ -43,7 +41,7 @@ export const SearchPage = () => {
 
   const navigate = useNavigate();
 
-  const { sortBy, dateRange, type } = filters;
+  const { query } = filters;
 
   useEffect(() => {
     const { urlParams, apiParams } = urlParser({
@@ -56,66 +54,14 @@ export const SearchPage = () => {
     fetchNews(apiParams);
   }, [currentPage, filters]);
 
-  const FilterSettings: React.FC<Component> = ({ className }) => (
-    <div className={className}>
-      <FormControl variant="standard" sx={{ width: 150 }}>
-        <InputLabel>Search Tags</InputLabel>
-
-        <Select
-          value={type}
-          onChange={(e) => {
-            setFilters({ ...filters, type: `${e.target.value}` });
-          }}
-          label="type"
-        >
-          <MenuItem value="All">All</MenuItem>
-          <MenuItem value="story">Stories</MenuItem>
-          <MenuItem value="comment">Comments</MenuItem>
-        </Select>
-      </FormControl>
-
-      <FormControl variant="standard" sx={{ width: 150 }}>
-        <InputLabel>Sort By</InputLabel>
-
-        <Select
-          value={sortBy}
-          onChange={(e) => {
-            setFilters({ ...filters, sortBy: e.target.value });
-          }}
-          label="sortBy"
-        >
-          <MenuItem value="popularity">Popularity</MenuItem>
-          <MenuItem value="date">Date</MenuItem>
-        </Select>
-      </FormControl>
-
-      <FormControl variant="standard" sx={{ width: 150 }}>
-        <InputLabel>Upload Date</InputLabel>
-
-        <Select
-          value={dateRange}
-          onChange={(e) => {
-            setFilters({ ...filters, dateRange: `${e.target.value}` });
-          }}
-          label="dateRange"
-        >
-          <MenuItem value="All">All Time</MenuItem>
-          <MenuItem value="1d">Last 24h</MenuItem>
-          <MenuItem value="7d">Past Week</MenuItem>
-          <MenuItem value="31d">Past Month</MenuItem>
-          <MenuItem value="355d">Past Year</MenuItem>
-        </Select>
-      </FormControl>
-    </div>
-  );
-
   return (
-    <PageLayout title="" className="!flex flex-col gap-5">
+    <PageLayout title="Search & Filters" className="!flex flex-col gap-5">
       <div className="flex items-end lg:items-center gap-5 lg:gap-2 justify-between">
         <TextField
           className="w-full lg:w-1/2"
           label="Search stories by title, url or author"
           variant="standard"
+          value={query}
           onChange={(e) => setFilters({ ...filters, query: e.target.value })}
         />
 
@@ -126,7 +72,11 @@ export const SearchPage = () => {
           <FilterAltIcon fontSize="large" />
         </button>
 
-        <FilterSettings className="hidden lg:flex items-center gap-2" />
+        <FilterSettings
+          filters={filters}
+          setFilters={setFilters}
+          className="hidden lg:flex items-center gap-2"
+        />
       </div>
 
       <NewsContainer
@@ -139,11 +89,16 @@ export const SearchPage = () => {
       />
 
       <DialogBox
-        onClose={(value) => setIsDialogOpen(false)}
+        title="Filters"
+        onClose={() => setIsDialogOpen(false)}
         open={isDialogOpen}
         className="grid place-content-center"
       >
-        <FilterSettings className="grid items-center gap-2" />
+        <FilterSettings
+          filters={filters}
+          setFilters={setFilters}
+          className="grid items-center gap-2"
+        />
       </DialogBox>
     </PageLayout>
   );

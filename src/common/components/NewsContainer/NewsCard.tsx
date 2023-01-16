@@ -66,13 +66,16 @@ export const NewsCard: React.FC<Props> = ({
 
         <div className="flex items-center gap-4">
           <Tooltip title="Hide News" placement="left">
-            <DeleteOutlineIcon onClick={() => hideNews(objectID)} />
+            <DeleteOutlineIcon
+              className="cursor-pointer"
+              onClick={() => hideNews(objectID)}
+            />
           </Tooltip>
 
           {url && (
             <a href={url}>
               <Tooltip title={url} placement="bottom-start">
-                <OpenInNewIcon />
+                <OpenInNewIcon className="cursor-pointer" />
               </Tooltip>
             </a>
           )}

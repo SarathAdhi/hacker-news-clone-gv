@@ -23,7 +23,7 @@ export const NewStoriesPage = () => {
   }, [currentPage]);
 
   return (
-    <PageLayout title="">
+    <PageLayout title="New Stories">
       <NewsContainer
         isLoading={isLoading}
         newsData={newsData}

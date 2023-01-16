@@ -19,7 +19,7 @@ export const HomePage = () => {
   }, [currentPage]);
 
   return (
-    <PageLayout title="">
+    <PageLayout title="Home">
       <NewsContainer
         isLoading={isLoading}
         newsData={newsData}

@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import Container from "@mui/material/Container";
 import clsx from "clsx";
 import React, { useEffect } from "react";
 import { Navbar } from "../components/Navbar";
@@ -10,7 +10,7 @@ type Props = {
 
 export const PageLayout: React.FC<Props> = ({ title, className, children }) => {
   useEffect(() => {
-    if (title) document.title = title;
+    if (title) document.title = `Hacker News | ${title}`;
   }, []);
 
   return (
