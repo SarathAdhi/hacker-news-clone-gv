@@ -14,8 +14,12 @@ export const HomePage = () => {
     hideNews,
   } = useFetchApi();
 
+  async function fetchApiAsync() {
+    await fetchNews("/search?tags=front_page&hitsPerPage=12");
+  }
+
   useEffect(() => {
-    fetchNews("/search?tags=front_page&hitsPerPage=12");
+    fetchApiAsync();
   }, [currentPage]);
 
   return (
