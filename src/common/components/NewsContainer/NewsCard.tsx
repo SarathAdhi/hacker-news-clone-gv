@@ -7,6 +7,7 @@ import moment from "moment";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import { useLocation } from "react-router-dom";
 
 type Props = {
   number: number;
@@ -25,6 +26,9 @@ export const NewsCard: React.FC<Props> = ({
   hideNews,
   num_comments,
 }) => {
+  const location = useLocation();
+  const isSearchPage = location.pathname.includes("search");
+
   return (
     <Paper elevation={1} className="p-3 flex gap-2">
       <Typography variant="h5" className="flex text-gray-400">
@@ -32,15 +36,17 @@ export const NewsCard: React.FC<Props> = ({
       </Typography>
 
       <div className="w-full flex items-start justify-between gap-10">
-        <div className="flex flex-col justify-between h-full">
-          <Typography variant="h5">{title || "[ No Title ]"}</Typography>
+        <div className="flex flex-col justify-between gap-3 h-full">
+          <Typography variant="h5">
+            {isSearchPage ? !!title && title : title || "[No Title]"}
 
-          {comment_text && (
-            <p
-              className="font-medium text-sm md:text-base"
-              dangerouslySetInnerHTML={{ __html: comment_text }}
-            />
-          )}
+            {comment_text && (
+              <p
+                className="mt-1 font-medium text-sm md:text-base"
+                dangerouslySetInnerHTML={{ __html: comment_text }}
+              />
+            )}
+          </Typography>
 
           <span className="text-xs md:text-base text-gray-400 !font-medium flex items-center gap-1">
             {points} points by {author} {`| ${moment(created_at).fromNow()}`}
