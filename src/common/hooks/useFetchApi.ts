@@ -10,7 +10,7 @@ type Response = {
 
 export const useFetchApi = () => {
   const location = useLocation();
-  const _page = location.search?.split("&page=")[1];
+  const _page = location.search?.split("page=")[1];
 
   const [newsData, setNewsData] = useState<News[]>([]);
   const [currentPage, setCurrentPage] = useState(_page ? parseInt(_page) : 1);
