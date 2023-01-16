@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { NewsContainer } from "../common/components/NewsContainer";
 import { useFetchApi } from "../common/hooks/useFetchApi";
 import { PageLayout } from "../common/layouts/PageLayout";
@@ -13,8 +14,11 @@ export const NewStoriesPage = () => {
     paginationCount,
     hideNews,
   } = useFetchApi();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    navigate(`/new?page=${currentPage}`, { replace: true });
+
     const unixTime = Date.now();
 
     fetchNews(
