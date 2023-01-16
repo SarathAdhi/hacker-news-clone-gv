@@ -22,6 +22,13 @@ The goal of this assignment is to evaluate
 
 #### Hacker News Website: https://news.ycombinator.com/news
 
+### Features
+
+- Cool and minimal UI
+- Responsive UI
+- Proper pagination features
+- URL parameter filters with sharable links
+
 ## Getting Started
 
 1. Clone or download the Repo.
