@@ -3,5 +3,6 @@ export type UrlParams = {
   sortBy?: string;
   dateRange?: string;
   query?: string;
+  page?: number;
   currentUrlPath?: string;
 };

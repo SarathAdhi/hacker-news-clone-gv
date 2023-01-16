@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "../../lib/axios";
 import { News } from "../types/news";
 
@@ -8,8 +9,11 @@ type Response = {
 };
 
 export const useFetchApi = () => {
+  const location = useLocation();
+  const _page = location.search?.split("&page=")[1];
+
   const [newsData, setNewsData] = useState<News[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(_page ? parseInt(_page) : 1);
   const [paginationCount, setPaginationCount] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 

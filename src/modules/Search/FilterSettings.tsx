@@ -11,6 +11,7 @@ export type FilterParams = {
   sortBy: string;
   dateRange: string;
   query: string;
+  page: number;
 };
 
 type Props = {
@@ -84,6 +85,7 @@ export const FilterSettings: React.FC<Props> = ({
             type: "All",
             sortBy: "popularity",
             dateRange: "All",
+            page: 1,
           });
         }}
       >

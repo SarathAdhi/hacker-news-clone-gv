@@ -1,5 +1,5 @@
 import { Box, Pagination } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { News } from "../../types/news";
 import { Component } from "../../types/page";
 import { NewsLoadingSkeleton } from "../NewsLoadingSkeleton";
@@ -23,6 +23,10 @@ export const NewsContainer: React.FC<Props> = ({
   hideNews,
 }) => {
   const [newsCount, setNewsCount] = useState(1);
+
+  useEffect(() => {
+    setNewsCount(10 * (currentPage - 1) + 1);
+  }, [currentPage]);
 
   if (isLoading) return <NewsLoadingSkeleton />;
 
@@ -48,13 +52,13 @@ export const NewsContainer: React.FC<Props> = ({
 
           setCurrentPage(value);
 
-          if (prePage === value - 1) setNewsCount(newsCount + 12);
-          else if (prePage === value + 1) setNewsCount(newsCount - 12);
+          if (prePage === value - 1) setNewsCount(newsCount + 10);
+          else if (prePage === value + 1) setNewsCount(newsCount - 10);
           else
             setNewsCount(
               diff < 0
-                ? Math.floor(newsCount - 12 * -diff)
-                : 12 * Math.abs(value - prePage) + 1
+                ? Math.abs(newsCount - 10 * -diff)
+                : 10 * Math.abs(value - 1) + 1
             );
         }}
         color="primary"

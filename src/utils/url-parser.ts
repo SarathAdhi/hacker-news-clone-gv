@@ -20,12 +20,16 @@ export function urlParser(params: UrlParams) {
       : ""
   }`;
 
+  const page = !!params.page ? `&page=${params.page}` : "";
+
   const currentUrlPath = params.currentUrlPath
     ? `${params.currentUrlPath}`
     : "";
 
   return {
     apiParams: `${sortBy}?${query + type + time}`,
-    urlParams: `${currentUrlPath}?sortBy=${sortBy}${query + type + time}`,
+    urlParams: `${currentUrlPath}?sortBy=${sortBy}${
+      query + type + time + page
+    }`,
   };
 }

@@ -34,6 +34,7 @@ export const SearchPage = () => {
     type: _type || "All",
     sortBy: _sortBy || "popularity",
     dateRange: _dateRange || "All",
+    page: currentPage,
   });
 
   const { query } = filters;
@@ -41,6 +42,7 @@ export const SearchPage = () => {
   useEffect(() => {
     const { urlParams, apiParams } = urlParser({
       ...filters,
+      page: currentPage,
       currentUrlPath: "/search",
     });
 
