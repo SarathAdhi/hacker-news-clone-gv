@@ -18,11 +18,14 @@ export const useFetchApi = () => {
 
     const url = `${params}&page=${currentPage - 1}&hitsPerPage=10`;
 
-    const data: Response = await axios.get(url);
+    try {
+      const data: Response = await axios.get(url);
+      setPaginationCount(data.nbPages !== 0 ? data.nbPages - 1 : 0);
 
-    setPaginationCount(data.nbPages !== 0 ? data.nbPages - 1 : 0);
-
-    setNewsData(data.hits);
+      setNewsData(data.hits);
+    } catch (error) {
+      alert(error);
+    }
 
     setIsLoading(false);
   }

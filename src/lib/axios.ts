@@ -1,5 +1,4 @@
-import Axios, { AxiosRequestConfig } from "axios";
-import { apiUrl } from "../utils/constants/api-url";
+import Axios from "axios";
 
 export type AxiosResponse = {
   message: string;
@@ -8,7 +7,7 @@ export type AxiosResponse = {
 };
 
 const axios = Axios.create({
-  baseURL: apiUrl,
+  baseURL: "http://hn.algolia.com/api/v1",
 });
 
 axios.interceptors.response.use(

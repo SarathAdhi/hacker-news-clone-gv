@@ -38,7 +38,7 @@ export const SearchPage = () => {
 
   const { query } = filters;
 
-  async function fetchApiAsync() {
+  useEffect(() => {
     const { urlParams, apiParams } = urlParser({
       ...filters,
       currentUrlPath: "/search",
@@ -46,11 +46,7 @@ export const SearchPage = () => {
 
     navigate(`${urlParams}`, { replace: true, state: filters });
 
-    await fetchNews(apiParams);
-  }
-
-  useEffect(() => {
-    fetchApiAsync();
+    fetchNews(apiParams);
   }, [currentPage, filters]);
 
   return (

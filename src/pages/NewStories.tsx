@@ -14,16 +14,12 @@ export const NewStoriesPage = () => {
     hideNews,
   } = useFetchApi();
 
-  async function fetchApiAsync() {
+  useEffect(() => {
     const unixTime = Date.now();
 
-    await fetchNews(
+    fetchNews(
       `/search_by_date?tags=story&numericFilters=created_at_i<=${unixTime}&hitsPerPage=12`
     );
-  }
-
-  useEffect(() => {
-    fetchApiAsync();
   }, [currentPage]);
 
   return (
